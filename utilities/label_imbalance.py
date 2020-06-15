@@ -627,3 +627,17 @@ def print_metrics(labels_test, prediction,name):
     print(metrics.classification_report(labels_test, prediction,zero_division=0))
     print('')
     #return(HL,ACC,F1_micro,F1_macro,precision_micro,precision_macro,recall_micro,recall_macro)
+    
+def transform_dataframe_to_dictionary(labels):
+    labels_dictionary={}
+    #labels_dictionary['key'] = []
+    for i in range(len(labels)):
+        #instance='instance_'+str(i)
+        labels_dictionary.setdefault('instance', [])
+        x_series=labels.iloc[i]
+        list_of_ones = list(x_series.loc[x_series != 0].index)
+        labels_dictionary['instance'].append(list_of_ones)
+        
+    labels_dictionary2=labels_dictionary['instance']  
+    labels_dictionary = { i : labels_dictionary2[i] for i in range(0, len(labels_dictionary2) ) }    
+    return(labels_dictionary)
