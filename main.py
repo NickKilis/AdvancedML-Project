@@ -131,7 +131,6 @@ features_test=data_test.iloc[:,:dataset_features]
 labels_test=data_test.iloc[:,dataset_features:]
 labels_test=dataframe_bytes_to_int(labels_test)
 k_neighbors=3
-
 # mlsmote's new samples
 IRLblis_complete=imba.find_IRLblis_complete(IRLblis,labels_train)
 label_generation_method="Ranking"
@@ -148,8 +147,15 @@ dataset_original_mlsmote = pd.concat([features_original_mlsmote, labels_original
 dataset_mlsmote = pd.concat([features_mlsmote, labels_mlsmote], axis=1, ignore_index=True)
 dataset_original_remedial.columns =range(0,dataset_features+dataset_labels)
 
-dataset_remedial_mlsmote=pd.concat([dataset_original_remedial, dataset_mlsmote], ignore_index=True)
-dataset_remedial_mlsmote.columns=data.columns
+features_train_rem=dataset_original_remedial.iloc[:,:dataset_features]
+labels_train_rem=dataset_original_remedial.iloc[:,dataset_features:]
+IRLblis_complete_rem=imba.find_IRLblis_complete(IRLblis_remedial,labels_train_rem)
+mean_IR_rem=mean_IR_remedial
+features_rem_mlsmote,labels_rem_mlsmote=imba.apply_mlsmote_algorithm(IRLblis_complete_rem,mean_IR_rem,k_neighbors,features_train_rem,labels_train_rem,categories,label_generation_method)
+dataset_rem_mlsmote = pd.concat([features_rem_mlsmote, labels_rem_mlsmote], axis=1, ignore_index=True)
+dataset_rem_mlsmote.columns=data.columns
+dataset_original_remedial.columns=data.columns
+dataset_remedial_mlsmote=pd.concat([dataset_original_remedial, dataset_rem_mlsmote], axis=0, ignore_index=True)
 #-----------------------------------------------------------------------------#
 #------------------------IMBALANCE COMPARISON MLSMOTE-------------------------#
 title_name_mlsmote="after MLSMOTE"
