@@ -222,19 +222,19 @@ recall micro   : 0.5939849624060151
 recall macro   : 0.5803896030109489
 '''
 print("")
-print("RESULTS AFTER GRID SEARCH - BRRF-50-gini :")
+print("RESULTS AFTER GRID SEARCH - BRRF-80-entropy :")
 print('The best model parameters for dataset remedial-mlsmote are : ')
-print("PowerTransformer(method='yeo-johnson') ,StandardScaler(with_mean=True,with_std=True)")
-print("Training score=0.16809269270584465 ,Test score=0.39999999999999997")
+print("minmax ,'passthrough'")
+print("Training score=0.26809269270584465 ,Test score=0.4180790960451978")
 '''
-Hamming loss   : 0.2599009900990099
-Accuracy       : 0.14356435643564355
-f1 score micro : 0.39999999999999997
-f1 score macro : 0.37979303164821593
-precision micro: 0.8333333333333334
-precision macro: 0.8646464646464646
-recall micro   : 0.2631578947368421
-recall macro   : 0.29160842393944614
+Hamming loss   : 0.25495049504950495
+Accuracy       : 0.15346534653465346
+f1 score micro : 0.4180790960451978
+f1 score macro : 0.40660125695935284
+precision micro: 0.8409090909090909
+precision macro: 0.8815628815628815
+recall micro   : 0.2781954887218045
+recall macro   : 0.304706115525895
 '''
 print("")
 #-----------------------------------------------------------------------------#
